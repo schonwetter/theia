@@ -144,9 +144,7 @@ export abstract class FileDialog<T> extends AbstractDialog<T> {
         this.treePanel = new Panel();
         this.treePanel.addWidget(this.widget);
         this.toDispose.push(this.treePanel);
-        this.toDispose.push(this.model.onChanged(() => this.update()));
         this.toDispose.push(this.model.onDidOpenFile(() => this.accept()));
-        this.toDispose.push(this.model.onSelectionChanged(() => this.update()));
 
         const navigationPanel = document.createElement('div');
         navigationPanel.classList.add(NAVIGATION_PANEL_CLASS);
@@ -188,6 +186,10 @@ export abstract class FileDialog<T> extends AbstractDialog<T> {
     }
 
     protected override onUpdateRequest(msg: Message): void {
+        if (!this.isAttached || !this.isVisible) {
+            return;
+        }
+
         super.onUpdateRequest(msg);
         setEnabled(this.back, this.model.canNavigateBackward());
         setEnabled(this.forward, this.model.canNavigateForward());
@@ -243,6 +245,9 @@ export abstract class FileDialog<T> extends AbstractDialog<T> {
     }
 
     protected override onAfterAttach(msg: Message): void {
+        this.toDisposeOnDetach.push(this.model.onChanged(() => this.update()));
+        this.toDisposeOnDetach.push(this.model.onSelectionChanged(() => this.update()));
+
         Widget.attach(this.treePanel, this.contentNode);
         this.toDisposeOnDetach.push(Disposable.create(() => {
             Widget.detach(this.treePanel);
