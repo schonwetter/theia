@@ -9,11 +9,14 @@
 - [plugin] added `Task#runOptions` field and `RunOptions` interface [#11759](https://github.com/eclipse-theia/theia/pull/11759) - Contributed on behalf of STMicroelectronics
 - [tasks] added support for `reevaluateOnRerun` run option [#11759](https://github.com/eclipse-theia/theia/pull/11759) - Contributed on behalf of STMicroelectronics
 - [plugin] updated the default VS Code API version from `1.53.2` to `1.55.2` [#11823](https://github.com/eclipse-theia/theia/pull/11823)
+- [plugin] aligned typings for `HoverProvider.provideHover` with VS Code [#11862](https://github.com/eclipse-theia/theia/pull/11862) - Contributed on behalf of STMicroelectronics
 
 <a name="breaking_changes_1.32.0">[Breaking Changes:](#breaking_changes_1.32.0)</a>
 
 - [tasks] if the variables of a task should be reevaluated on a rerun (this was the behavior until now) the `reevaluateOnRerun` run option in the task description needs to be set to `true` from now on [#11759](https://github.com/eclipse-theia/theia/pull/11759) - Contributed on behalf of STMicroelectronics
 - [preferences] `PreferenceHeaderRendererContribution` moved to `preference-node-renderer-creator.ts`. [#11432](https://github.com/eclipse-theia/theia/pull/11432)
+- [workspace] removed `workspace.supportMultiRootWorkspace` preference [#11538](https://github.com/eclipse-theia/theia/pull/11538)
+- [workspace] removed method `isMultiRootWorkspaceEnabled` from `WorkspaceService` [#11538](https://github.com/eclipse-theia/theia/pull/11538)
 
 ## v1.31.0 - 10/27/2022
 
